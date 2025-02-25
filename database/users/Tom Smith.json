@@ -1,0 +1,12 @@
+{
+  "name" : "Tom Smith",
+  "age" : "35",
+  "contact" : "1234509876",
+  "company" : "Apple",
+  "address" : {
+    "city" : "Chennai",
+    "state" : "Tamil Nadu",
+    "country" : "India",
+    "pincode" : "600001"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name" : "John Doe",
+  "age" : "30",
+  "contact" : "1234567890",
+  "company" : "Amazon",
+  "address" : {
+    "city" : "Bangalore",
+    "state" : "Karnataka",
+    "country" : "India",
+    "pincode" : "560001"
+  }
+}
