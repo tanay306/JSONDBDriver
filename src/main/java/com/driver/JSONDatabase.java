@@ -10,13 +10,14 @@ import java.util.concurrent.*;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * A simple JSON-based database supporting multi-threaded operations.
+ * A JSON-based database supporting multi-threaded operations and ACID transactions.
  */
 public class JSONDatabase {
     private final String directory;
     private final ObjectMapper objectMapper;
     private final ConcurrentHashMap<String, ReentrantLock> collectionLocks;
     private final ExecutorService executorService;
+    private final TransactionManager transactionManager;
 
     /**
      * Initializes the database with a specified directory.
@@ -26,6 +27,28 @@ public class JSONDatabase {
         this.objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
         this.collectionLocks = new ConcurrentHashMap<>();
         this.executorService = Executors.newFixedThreadPool(10);
+        this.transactionManager = new TransactionManager();
+    }
+
+    /**
+     * Starts a new transaction.
+     */
+    public void startTransaction() {
+        transactionManager.startTransaction();
+    }
+
+    /**
+     * Commits the ongoing transaction.
+     */
+    public void commitTransaction() throws IOException {
+        transactionManager.commitTransaction();
+    }
+
+    /**
+     * Rolls back the ongoing transaction.
+     */
+    public void rollbackTransaction() {
+        transactionManager.rollbackTransaction();
     }
 
     /**
@@ -43,7 +66,7 @@ public class JSONDatabase {
     }
 
     /**
-     * Inserts or updates a user in the database asynchronously.
+     * Inserts or updates a user in the database asynchronously with transaction support.
      */
     public Future<Void> insertOrUpdate(String collection, String resource, User user) {
         return executorService.submit(() -> {
@@ -60,8 +83,15 @@ public class JSONDatabase {
                 }
 
                 File file = new File(collectionDir, resource + ".json");
-                objectMapper.writeValue(file, user);
-                Logger.log("SUCCESS", "Thread " + threadId + " inserted/updated " + resource + " in collection: " + collection);
+                String jsonData = objectMapper.writeValueAsString(user);
+
+                if (transactionManager.isTransactionActive()) {
+                    transactionManager.addToTransaction(file.getAbsolutePath(), jsonData);
+                    Logger.log("TRANSACTION", "Buffered update for " + resource);
+                } else {
+                    objectMapper.writeValue(file, user);
+                    Logger.log("SUCCESS", "Thread " + threadId + " inserted/updated " + resource + " in collection: " + collection);
+                }
             } finally {
                 lock.unlock();
             }
@@ -125,7 +155,7 @@ public class JSONDatabase {
     }
 
     /**
-     * Deletes a user or collection from the database asynchronously.
+     * Deletes a user or collection from the database asynchronously with transaction support.
      */
     public Future<Void> delete(String collection, String resource) {
         return executorService.submit(() -> {
@@ -142,12 +172,16 @@ public class JSONDatabase {
                     return null;
                 }
 
-                if (target.isDirectory()) {
-                    for (File file : Objects.requireNonNull(target.listFiles())) file.delete();
+                if (transactionManager.isTransactionActive()) {
+                    transactionManager.addToTransaction(target.getAbsolutePath(), null);
+                    Logger.log("TRANSACTION", "Buffered delete for " + resource);
+                } else {
+                    if (target.isDirectory()) {
+                        for (File file : Objects.requireNonNull(target.listFiles())) file.delete();
+                    }
+                    target.delete();
+                    Logger.log("SUCCESS", "Thread " + threadId + " deleted resource: " + target.getPath());
                 }
-                target.delete();
-
-                Logger.log("SUCCESS", "Thread " + threadId + " deleted resource: " + target.getPath());
             } finally {
                 lock.unlock();
             }

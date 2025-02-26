@@ -8,7 +8,7 @@ import java.util.concurrent.*;
 import java.util.ArrayList;
 
 /**
- * Main class for demonstrating the JSON database operations.
+ * Main class for demonstrating JSON database operations with ACID transactions and multi-threading.
  */
 public class Main {
     public static void main(String[] args) {
@@ -27,35 +27,111 @@ public class Main {
             User[] users = objectMapper.readValue(jsonFile, User[].class);
             Logger.log("SUCCESS", "Found " + users.length + " users in JSON.");
 
-            // Run insertions in parallel
-            List<Callable<Void>> tasks = new ArrayList<>();
-            for (User user : users) {
-                tasks.add(() -> {
-                    db.insertOrUpdate("users", user.name, user).get();
-                    return null;
-                });
-            }
+            // Perform Insertions in Parallel
+            insertUsersInParallel(db, users);
 
-            db.executeTasks(tasks);
+            // Read all users
+            readAllUsers(db);
 
-            Logger.log("INFO", "Fetching all users after insertion...");
-            Future<List<String>> futureUsers = db.readAll("users");
-            List<String> allUsers = futureUsers.get();
+            // Read and update a user
+            updateUser(db, "John Doe", "Amazon");
 
-            for (String user : allUsers) {
-                Logger.log("DATABASE", user);
-            }
+            // Simulate transaction with rollback
+            simulateTransaction(db);
 
-            Future<User> futureJohn = db.read("users", "John Doe");
-            User john = futureJohn.get();
-            john.company = "Amazon";
-            db.insertOrUpdate("users", "John Doe", john).get();
-
-            db.delete("users", "Jane Doe").get();
-            db.shutdown();
+            // Delete a user
+            deleteUser(db, "Jane Doe");
 
         } catch (IOException | InterruptedException | ExecutionException e) {
             Logger.log("ERROR", "Failed to process JSON: " + e.getMessage());
+        } finally {
+            db.shutdown();
         }
+    }
+
+    /**
+     * Inserts multiple users in parallel.
+     */
+    private static void insertUsersInParallel(JSONDatabase db, User[] users) throws InterruptedException {
+        Logger.log("INFO", "Inserting users in parallel...");
+        List<Callable<Void>> tasks = new ArrayList<>();
+        
+        for (User user : users) {
+            tasks.add(() -> {
+                db.insertOrUpdate("users", user.name, user).get();
+                return null;
+            });
+        }
+
+        db.executeTasks(tasks);
+        Logger.log("SUCCESS", "All users inserted successfully!");
+    }
+
+    /**
+     * Reads all users from the database and logs the results.
+     */
+    private static void readAllUsers(JSONDatabase db) throws InterruptedException, ExecutionException {
+        Logger.log("INFO", "Fetching all users after insertion...");
+        Future<List<String>> futureUsers = db.readAll("users");
+        List<String> allUsers = futureUsers.get();
+
+        for (String user : allUsers) {
+            Logger.log("DATABASE", user);
+        }
+    }
+
+    /**
+     * Reads, updates, and re-inserts a user.
+     */
+    private static void updateUser(JSONDatabase db, String userName, String newCompany) throws InterruptedException, ExecutionException {
+        Logger.log("INFO", "Updating user: " + userName + "...");
+        Future<User> futureUser = db.read("users", userName);
+        User user = futureUser.get();
+
+        if (user != null) {
+            user.company = newCompany;
+            db.insertOrUpdate("users", userName, user).get();
+            Logger.log("SUCCESS", userName + "'s company updated to " + newCompany);
+        } else {
+            Logger.log("ERROR", userName + " not found!");
+        }
+    }
+
+    /**
+     * Simulates a transaction with rollback in case of an error.
+     */
+    private static void simulateTransaction(JSONDatabase db) throws InterruptedException, ExecutionException {
+        Logger.log("TRANSACTION", "Starting a new transaction...");
+        db.startTransaction();
+
+        try {
+            User testUser = new User("TransactionUser", "35", "5551234567", "TestCorp",
+                    new Address("New York", "NY", "USA", "10001"));
+
+            db.insertOrUpdate("users", "TransactionUser", testUser).get();
+            Logger.log("TRANSACTION", "Inserted TransactionUser");
+
+            // Simulate an error condition
+            if (true) { 
+                throw new RuntimeException("Simulated error! Rolling back...");
+            }
+
+            db.commitTransaction();
+            Logger.log("TRANSACTION", "Transaction committed successfully!");
+
+        } catch (Exception e) {
+            Logger.log("ERROR", "Transaction failed: " + e.getMessage());
+            db.rollbackTransaction();
+            Logger.log("TRANSACTION", "Transaction rolled back!");
+        }
+    }
+
+    /**
+     * Deletes a user from the database.
+     */
+    private static void deleteUser(JSONDatabase db, String userName) throws InterruptedException, ExecutionException {
+        Logger.log("INFO", "Deleting user: " + userName + "...");
+        db.delete("users", userName).get();
+        Logger.log("SUCCESS", "User " + userName + " deleted successfully!");
     }
 }

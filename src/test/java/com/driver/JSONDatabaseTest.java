@@ -11,12 +11,12 @@ import java.util.concurrent.Future;
 
 /**
  * Unit test class for JSONDatabase.
- * Uses JUnit 5 to test the core database operations.
+ * Uses JUnit 5 to test the core database operations, including transactions.
  */
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class) // Ensures tests run in order
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class JSONDatabaseTest {
     private static JSONDatabase db;
-    private static final String TEST_DB_PATH = "./test_database"; // Test database directory
+    private static final String TEST_DB_PATH = "./test_database"; 
 
     /**
      * Initializes the database before running any tests.
@@ -37,10 +37,10 @@ public class JSONDatabaseTest {
                 new Address("Seattle", "Washington", "USA", "98101"));
 
         Future<Void> futureInsert = db.insertOrUpdate("users", user.name, user);
-        futureInsert.get();  // Ensures the insert operation completes before assertion
+        futureInsert.get();
 
         Future<User> futureUser = db.read("users", "Alice");
-        User retrievedUser = futureUser.get();  // Ensures the read operation completes
+        User retrievedUser = futureUser.get(); 
 
         assertNotNull(retrievedUser);
         assertEquals("Amazon", retrievedUser.company);
@@ -54,8 +54,7 @@ public class JSONDatabaseTest {
     @Order(2)
     public void testReadUser() throws ExecutionException, InterruptedException {
         Future<User> futureUser = db.read("users", "Alice");
-        User user = futureUser.get();  // Ensures asynchronous read is completed
-
+        User user = futureUser.get();
         assertNotNull(user);
         assertEquals("Amazon", user.company);
         Logger.log("TEST", "testReadUser passed!");
@@ -68,9 +67,9 @@ public class JSONDatabaseTest {
     @Order(3)
     public void testReadAllUsers() throws ExecutionException, InterruptedException {
         Future<List<String>> futureUsers = db.readAll("users");
-        List<String> users = futureUsers.get();  // Ensures async operation completes
+        List<String> users = futureUsers.get();
 
-        assertFalse(users.isEmpty()); // Ensures at least one user exists
+        assertFalse(users.isEmpty());
         Logger.log("TEST", "testReadAllUsers passed!");
     }
 
@@ -84,11 +83,11 @@ public class JSONDatabaseTest {
         User user = futureUser.get();
         assertNotNull(user);
 
-        user.company = "Google"; // Modify the company name
-        db.insertOrUpdate("users", "Alice", user).get();  // Ensure update is applied
+        user.company = "Google";
+        db.insertOrUpdate("users", "Alice", user).get();
 
         Future<User> futureUpdatedUser = db.read("users", "Alice");
-        User updatedUser = futureUpdatedUser.get();  // Read updated user
+        User updatedUser = futureUpdatedUser.get();
 
         assertNotNull(updatedUser);
         assertEquals("Google", updatedUser.company);
@@ -101,12 +100,12 @@ public class JSONDatabaseTest {
     @Test
     @Order(5)
     public void testDeleteUser() throws ExecutionException, InterruptedException {
-        db.delete("users", "Alice").get();  // Ensures deletion completes
+        db.delete("users", "Alice").get();
 
         Future<User> futureUser = db.read("users", "Alice");
         User user = futureUser.get();
 
-        assertNull(user); // Ensures user is deleted
+        assertNull(user);
         Logger.log("TEST", "testDeleteUser passed!");
     }
 
@@ -117,10 +116,57 @@ public class JSONDatabaseTest {
     @Order(6)
     public void testReadMissingUser() throws ExecutionException, InterruptedException {
         Future<User> futureUser = db.read("users", "Bob");
-        User user = futureUser.get();  // Ensures async read completes
+        User user = futureUser.get();
 
-        assertNull(user); // Bob should not exist
+        assertNull(user);
         Logger.log("TEST", "testReadMissingUser passed!");
+    }
+
+    /**
+     * Tests transaction commit operation.
+     */
+    @Test
+    @Order(7)
+    public void testTransactionCommit() throws ExecutionException, InterruptedException, IOException {
+        Logger.log("TEST", "Starting transaction test - Commit scenario...");
+        db.startTransaction();
+
+        User user = new User("TransactionUser", "30", "1234567890", "Netflix",
+                new Address("Los Angeles", "California", "USA", "90001"));
+
+        db.insertOrUpdate("users", "TransactionUser", user).get();
+        db.commitTransaction();
+
+        Future<User> futureUser = db.read("users", "TransactionUser");
+        User retrievedUser = futureUser.get();
+
+        assertNotNull(retrievedUser);
+        assertEquals("Netflix", retrievedUser.company);
+        Logger.log("TEST", "testTransactionCommit passed!");
+    }
+
+    /**
+     * Tests transaction rollback operation.
+     */
+    @Test
+    @Order(8)
+    public void testTransactionRollback() throws ExecutionException, InterruptedException {
+        Logger.log("TEST", "Starting transaction test - Rollback scenario...");
+        db.startTransaction();
+
+        User user = new User("RollbackUser", "27", "9876543210", "Facebook",
+                new Address("San Francisco", "California", "USA", "94105"));
+
+        db.insertOrUpdate("users", "RollbackUser", user).get();
+
+        Logger.log("TEST", "Simulated error occurred! Rolling back...");
+        db.rollbackTransaction();
+
+        Future<User> futureUser = db.read("users", "RollbackUser");
+        User retrievedUser = futureUser.get();
+
+        assertNull(retrievedUser);
+        Logger.log("TEST", "testTransactionRollback passed!");
     }
 
     /**
@@ -132,10 +178,10 @@ public class JSONDatabaseTest {
         if (testDB.exists()) {
             for (File file : testDB.listFiles()) {
                 if (file.isFile()) {
-                    file.delete(); // Deletes all files in the test database
+                    file.delete();
                 }
             }
-            testDB.delete(); // Deletes the test database directory
+            testDB.delete();
         }
         Logger.log("TEST", "Database cleaned up after tests!");
         db.shutdown();

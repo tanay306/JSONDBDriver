@@ -1,0 +1,12 @@
+{
+  "name" : "TransactionUser",
+  "age" : "30",
+  "contact" : "1234567890",
+  "company" : "Netflix",
+  "address" : {
+    "city" : "Los Angeles",
+    "state" : "California",
+    "country" : "USA",
+    "pincode" : "90001"
+  }
+}

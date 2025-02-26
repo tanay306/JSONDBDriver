@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.driver.JSONDatabaseTest" time="0.138" tests="6" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.driver.JSONDatabaseTest" time="0.146" tests="8" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="23"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -13,7 +13,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="/opt/homebrew/Cellar/openjdk/23.0.2/libexec/openjdk.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/surefire/surefirebooter-20250225224423765_3.jar /Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/surefire 2025-02-25T22-44-23_723-jvmRun1 surefire-20250225224423765_1tmp surefire_0-20250225224423765_2tmp"/>
+    <property name="sun.java.command" value="/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/surefire/surefirebooter-20250225230023409_3.jar /Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/surefire 2025-02-25T23-00-23_367-jvmRun1 surefire-20250225230023409_1tmp surefire_0-20250225230023409_2tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/test-classes:/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/classes:/Users/tanaygandhi/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.9.3/junit-jupiter-api-5.9.3.jar:/Users/tanaygandhi/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/Users/tanaygandhi/.m2/repository/org/junit/platform/junit-platform-commons/1.9.3/junit-platform-commons-1.9.3.jar:/Users/tanaygandhi/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/tanaygandhi/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.9.3/junit-jupiter-engine-5.9.3.jar:/Users/tanaygandhi/.m2/repository/org/junit/platform/junit-platform-engine/1.9.3/junit-platform-engine-1.9.3.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.0/jackson-databind-2.15.0.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.0/jackson-annotations-2.15.0.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.0/jackson-core-2.15.0.jar:"/>
@@ -30,7 +30,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
-    <property name="surefire.real.class.path" value="/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/surefire/surefirebooter-20250225224423765_3.jar"/>
+    <property name="surefire.real.class.path" value="/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/surefire/surefirebooter-20250225230023409_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="23.0.2"/>
@@ -59,7 +59,7 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="67.0"/>
   </properties>
-  <testcase name="testInsertUser" classname="com.driver.JSONDatabaseTest" time="0.036">
+  <testcase name="testInsertUser" classname="com.driver.JSONDatabaseTest" time="0.037">
     <system-out><![CDATA[[TEST] [Thread-1] Database initialized for testing!
 [THREAD] [Thread-30] Thread 30 is inserting/updating Alice
 [SUCCESS] [Thread-30] Thread 30 inserted/updated Alice in collection: users
@@ -68,7 +68,7 @@
 [TEST] [Thread-1] testInsertUser passed!
 ]]></system-out>
   </testcase>
-  <testcase name="testReadUser" classname="com.driver.JSONDatabaseTest" time="0.002">
+  <testcase name="testReadUser" classname="com.driver.JSONDatabaseTest" time="0.001">
     <system-out><![CDATA[[THREAD] [Thread-32] Thread 32 is reading Alice
 [INFO] [Thread-32] Thread 32 reading data from: ./test_database/users/Alice.json
 [TEST] [Thread-1] testReadUser passed!
@@ -90,7 +90,7 @@
 [TEST] [Thread-1] testUpdateUser passed!
 ]]></system-out>
   </testcase>
-  <testcase name="testDeleteUser" classname="com.driver.JSONDatabaseTest" time="0.001">
+  <testcase name="testDeleteUser" classname="com.driver.JSONDatabaseTest" time="0.002">
     <system-out><![CDATA[[THREAD] [Thread-37] Thread 37 is deleting Alice
 [SUCCESS] [Thread-37] Thread 37 deleted resource: ./test_database/users/Alice.json
 [THREAD] [Thread-38] Thread 38 is reading Alice
@@ -102,6 +102,30 @@
     <system-out><![CDATA[[THREAD] [Thread-39] Thread 39 is reading Bob
 [ERROR] [Thread-39] File not found: ./test_database/users/Bob.json
 [TEST] [Thread-1] testReadMissingUser passed!
+]]></system-out>
+  </testcase>
+  <testcase name="testTransactionCommit" classname="com.driver.JSONDatabaseTest" time="0.002">
+    <system-out><![CDATA[[TEST] [Thread-1] Starting transaction test - Commit scenario...
+[TRANSACTION] [Thread-1] Transaction started.
+[THREAD] [Thread-30] Thread 30 is inserting/updating TransactionUser
+[TRANSACTION] [Thread-30] Buffered update for TransactionUser
+[TRANSACTION] [Thread-1] Committing transaction...
+[TRANSACTION] [Thread-1] Transaction committed successfully.
+[THREAD] [Thread-31] Thread 31 is reading TransactionUser
+[INFO] [Thread-31] Thread 31 reading data from: ./test_database/users/TransactionUser.json
+[TEST] [Thread-1] testTransactionCommit passed!
+]]></system-out>
+  </testcase>
+  <testcase name="testTransactionRollback" classname="com.driver.JSONDatabaseTest" time="0.001">
+    <system-out><![CDATA[[TEST] [Thread-1] Starting transaction test - Rollback scenario...
+[TRANSACTION] [Thread-1] Transaction started.
+[THREAD] [Thread-32] Thread 32 is inserting/updating RollbackUser
+[TRANSACTION] [Thread-32] Buffered update for RollbackUser
+[TEST] [Thread-1] Simulated error occurred! Rolling back...
+[TRANSACTION] [Thread-1] Transaction rolled back.
+[THREAD] [Thread-33] Thread 33 is reading RollbackUser
+[ERROR] [Thread-33] File not found: ./test_database/users/RollbackUser.json
+[TEST] [Thread-1] testTransactionRollback passed!
 ]]></system-out>
   </testcase>
 </testsuite>

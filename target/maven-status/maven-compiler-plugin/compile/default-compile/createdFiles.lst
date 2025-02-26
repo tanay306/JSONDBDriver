@@ -1,5 +1,7 @@
-com/driver/JSONDatabase.class
 com/driver/Main.class
+com/driver/TransactionManager.class
 com/driver/User.class
 com/driver/Address.class
+com/driver/FileHandler.class
+com/driver/JSONDatabase.class
 com/driver/Logger.class
