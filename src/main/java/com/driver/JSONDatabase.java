@@ -9,12 +9,18 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * A simple JSON-based database supporting multi-threaded operations.
+ */
 public class JSONDatabase {
     private final String directory;
     private final ObjectMapper objectMapper;
     private final ConcurrentHashMap<String, ReentrantLock> collectionLocks;
     private final ExecutorService executorService;
 
+    /**
+     * Initializes the database with a specified directory.
+     */
     public JSONDatabase(String directory) {
         this.directory = directory;
         this.objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
@@ -22,15 +28,23 @@ public class JSONDatabase {
         this.executorService = Executors.newFixedThreadPool(10);
     }
 
-    // ✅ NEW: Allows Main.java to execute tasks in parallel
+    /**
+     * Allows executing multiple database operations in parallel.
+     */
     public void executeTasks(List<Callable<Void>> tasks) throws InterruptedException {
         executorService.invokeAll(tasks);
     }
 
+    /**
+     * Retrieves or creates a lock for the given collection.
+     */
     private ReentrantLock getOrCreateLock(String collection) {
         return collectionLocks.computeIfAbsent(collection, k -> new ReentrantLock());
     }
 
+    /**
+     * Inserts or updates a user in the database asynchronously.
+     */
     public Future<Void> insertOrUpdate(String collection, String resource, User user) {
         return executorService.submit(() -> {
             long threadId = Thread.currentThread().getId();
@@ -55,6 +69,9 @@ public class JSONDatabase {
         });
     }
 
+    /**
+     * Reads a user from the database asynchronously.
+     */
     public Future<User> read(String collection, String resource) {
         return executorService.submit(() -> {
             long threadId = Thread.currentThread().getId();
@@ -76,6 +93,9 @@ public class JSONDatabase {
         });
     }
 
+    /**
+     * Reads all users from the specified collection asynchronously.
+     */
     public Future<List<String>> readAll(String collection) {
         return executorService.submit(() -> {
             long threadId = Thread.currentThread().getId();
@@ -104,6 +124,9 @@ public class JSONDatabase {
         });
     }
 
+    /**
+     * Deletes a user or collection from the database asynchronously.
+     */
     public Future<Void> delete(String collection, String resource) {
         return executorService.submit(() -> {
             long threadId = Thread.currentThread().getId();
@@ -132,6 +155,9 @@ public class JSONDatabase {
         });
     }
 
+    /**
+     * Shuts down the database's thread pool.
+     */
     public void shutdown() {
         executorService.shutdown();
     }

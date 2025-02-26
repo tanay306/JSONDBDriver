@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.concurrent.*;
 import java.util.ArrayList;
 
+/**
+ * Main class for demonstrating the JSON database operations.
+ */
 public class Main {
     public static void main(String[] args) {
         String dbPath = "./database";
@@ -24,7 +27,7 @@ public class Main {
             User[] users = objectMapper.readValue(jsonFile, User[].class);
             Logger.log("SUCCESS", "Found " + users.length + " users in JSON.");
 
-            // ✅ Run insertions in parallel
+            // Run insertions in parallel
             List<Callable<Void>> tasks = new ArrayList<>();
             for (User user : users) {
                 tasks.add(() -> {
@@ -33,7 +36,6 @@ public class Main {
                 });
             }
 
-            // ✅ Use the new public method instead of accessing executorService
             db.executeTasks(tasks);
 
             Logger.log("INFO", "Fetching all users after insertion...");
