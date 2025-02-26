@@ -10,7 +10,7 @@ import java.util.concurrent.*;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * A JSON-based database supporting multi-threaded operations, caching, and ACID transactions.
+ * A JSON-based database supporting multi-threaded operations, caching, ACID transactions, and Kafka event streaming.
  */
 public class JSONDatabase {
     private final String directory;
@@ -19,17 +19,19 @@ public class JSONDatabase {
     private final ExecutorService executorService;
     private final TransactionManager transactionManager;
     private final ConcurrentHashMap<String, User> cache;
+    private final KafkaProducerService kafkaProducer;
 
     /**
      * Initializes the database with a specified directory.
      */
-    public JSONDatabase(String directory) {
+    public JSONDatabase(String directory, String kafkaBootstrapServers, String kafkaTopic) {
         this.directory = directory;
         this.objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
         this.collectionLocks = new ConcurrentHashMap<>();
         this.executorService = Executors.newFixedThreadPool(10);
         this.transactionManager = new TransactionManager();
         this.cache = new ConcurrentHashMap<>();
+        this.kafkaProducer = new KafkaProducerService(kafkaBootstrapServers, kafkaTopic);
     }
 
     /**
@@ -47,7 +49,7 @@ public class JSONDatabase {
     }
 
     /**
-     * Inserts or updates a user in the database asynchronously with transaction support and caching.
+     * Inserts or updates a user in the database asynchronously with transaction support, caching, and Kafka event publishing.
      */
     public Future<Void> insertOrUpdate(String collection, String resource, User user) {
         return executorService.submit(() -> {
@@ -70,6 +72,7 @@ public class JSONDatabase {
                 } else {
                     objectMapper.writeValue(file, user);
                     cache.put(resource, user);
+                    kafkaProducer.publishEvent("INSERT_UPDATE", "User " + resource + " updated in " + collection);
                 }
             } finally {
                 lock.unlock();
@@ -79,7 +82,7 @@ public class JSONDatabase {
     }
 
     /**
-     * Reads a user from the database asynchronously with caching support.
+     * Reads a user from the database asynchronously with caching, mutex locking, and Kafka event publishing.
      */
     public Future<User> read(String collection, String resource) {
         return executorService.submit(() -> {
@@ -98,6 +101,7 @@ public class JSONDatabase {
                 }
                 User user = objectMapper.readValue(file, User.class);
                 cache.put(resource, user);
+                kafkaProducer.publishEvent("READ", "User " + resource + " read from " + collection);
                 return user;
             } finally {
                 lock.unlock();
@@ -119,7 +123,6 @@ public class JSONDatabase {
             return read(collection, resource).get();
         });
     }
-
 
     /**
      * Reads all users from the specified collection asynchronously.
@@ -148,7 +151,7 @@ public class JSONDatabase {
     }
 
     /**
-     * Deletes a user or collection from the database asynchronously with transaction support.
+     * Deletes a user or collection from the database asynchronously with transaction support and Kafka event publishing.
      */
     public Future<Void> delete(String collection, String resource) {
         return executorService.submit(() -> {
@@ -169,6 +172,7 @@ public class JSONDatabase {
                     }
                     target.delete();
                     cache.remove(resource);
+                    kafkaProducer.publishEvent("DELETE", "User " + resource + " deleted from " + collection);
                 }
             } finally {
                 lock.unlock();
@@ -243,9 +247,10 @@ public class JSONDatabase {
     }
 
     /**
-     * Shuts down the database's thread pool.
+     * Shuts down the database's thread pool and Kafka producer.
      */
     public void shutdown() {
+        kafkaProducer.close();
         executorService.shutdown();
     }
 }

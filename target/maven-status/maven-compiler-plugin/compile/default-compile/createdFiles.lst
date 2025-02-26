@@ -4,4 +4,7 @@ com/driver/User.class
 com/driver/Address.class
 com/driver/FileHandler.class
 com/driver/JSONDatabase.class
+com/driver/KafkaConsumerService.class
+com/driver/KafkaProducerService.class
 com/driver/Logger.class
+com/driver/KafkaConsumerMain.class

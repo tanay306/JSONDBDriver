@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.driver.JSONDatabaseTest" time="0.147" tests="10" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.driver.JSONDatabaseTest" time="0.356" tests="9" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="23"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.class.path" value="/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/test-classes:/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/classes:/Users/tanaygandhi/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.9.3/junit-jupiter-api-5.9.3.jar:/Users/tanaygandhi/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/Users/tanaygandhi/.m2/repository/org/junit/platform/junit-platform-commons/1.9.3/junit-platform-commons-1.9.3.jar:/Users/tanaygandhi/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/tanaygandhi/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.9.3/junit-jupiter-engine-5.9.3.jar:/Users/tanaygandhi/.m2/repository/org/junit/platform/junit-platform-engine/1.9.3/junit-platform-engine-1.9.3.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.0/jackson-databind-2.15.0.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.0/jackson-annotations-2.15.0.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.0/jackson-core-2.15.0.jar:"/>
+    <property name="java.class.path" value="/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/test-classes:/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/classes:/Users/tanaygandhi/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.9.3/junit-jupiter-api-5.9.3.jar:/Users/tanaygandhi/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/Users/tanaygandhi/.m2/repository/org/junit/platform/junit-platform-commons/1.9.3/junit-platform-commons-1.9.3.jar:/Users/tanaygandhi/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/tanaygandhi/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.9.3/junit-jupiter-engine-5.9.3.jar:/Users/tanaygandhi/.m2/repository/org/junit/platform/junit-platform-engine/1.9.3/junit-platform-engine-1.9.3.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.0/jackson-databind-2.15.0.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.0/jackson-annotations-2.15.0.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.0/jackson-core-2.15.0.jar:/Users/tanaygandhi/.m2/repository/org/apache/kafka/kafka-clients/3.5.1/kafka-clients-3.5.1.jar:/Users/tanaygandhi/.m2/repository/com/github/luben/zstd-jni/1.5.5-1/zstd-jni-1.5.5-1.jar:/Users/tanaygandhi/.m2/repository/org/lz4/lz4-java/1.8.0/lz4-java-1.8.0.jar:/Users/tanaygandhi/.m2/repository/org/xerial/snappy/snappy-java/1.1.10.1/snappy-java-1.1.10.1.jar:/Users/tanaygandhi/.m2/repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:"/>
     <property name="java.vm.vendor" value="Homebrew"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.vendor.url" value="https://github.com/Homebrew/homebrew-core/issues"/>
@@ -13,10 +13,10 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="/opt/homebrew/Cellar/openjdk/23.0.2/libexec/openjdk.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/surefire/surefirebooter-20250225232328553_3.jar /Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/surefire 2025-02-25T23-23-28_511-jvmRun1 surefire-20250225232328553_1tmp surefire_0-20250225232328553_2tmp"/>
+    <property name="sun.java.command" value="/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/surefire/surefirebooter-20250226172136691_3.jar /Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/surefire 2025-02-26T17-21-36_651-jvmRun1 surefire-20250226172136691_1tmp surefire_0-20250226172136691_2tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/test-classes:/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/classes:/Users/tanaygandhi/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.9.3/junit-jupiter-api-5.9.3.jar:/Users/tanaygandhi/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/Users/tanaygandhi/.m2/repository/org/junit/platform/junit-platform-commons/1.9.3/junit-platform-commons-1.9.3.jar:/Users/tanaygandhi/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/tanaygandhi/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.9.3/junit-jupiter-engine-5.9.3.jar:/Users/tanaygandhi/.m2/repository/org/junit/platform/junit-platform-engine/1.9.3/junit-platform-engine-1.9.3.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.0/jackson-databind-2.15.0.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.0/jackson-annotations-2.15.0.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.0/jackson-core-2.15.0.jar:"/>
+    <property name="surefire.test.class.path" value="/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/test-classes:/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/classes:/Users/tanaygandhi/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.9.3/junit-jupiter-api-5.9.3.jar:/Users/tanaygandhi/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/Users/tanaygandhi/.m2/repository/org/junit/platform/junit-platform-commons/1.9.3/junit-platform-commons-1.9.3.jar:/Users/tanaygandhi/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/tanaygandhi/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.9.3/junit-jupiter-engine-5.9.3.jar:/Users/tanaygandhi/.m2/repository/org/junit/platform/junit-platform-engine/1.9.3/junit-platform-engine-1.9.3.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.0/jackson-databind-2.15.0.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.0/jackson-annotations-2.15.0.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.0/jackson-core-2.15.0.jar:/Users/tanaygandhi/.m2/repository/org/apache/kafka/kafka-clients/3.5.1/kafka-clients-3.5.1.jar:/Users/tanaygandhi/.m2/repository/com/github/luben/zstd-jni/1.5.5-1/zstd-jni-1.5.5-1.jar:/Users/tanaygandhi/.m2/repository/org/lz4/lz4-java/1.8.0/lz4-java-1.8.0.jar:/Users/tanaygandhi/.m2/repository/org/xerial/snappy/snappy-java/1.1.10.1/snappy-java-1.1.10.1.jar:/Users/tanaygandhi/.m2/repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="/Users/tanaygandhi"/>
     <property name="user.language" value="en"/>
@@ -30,7 +30,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
-    <property name="surefire.real.class.path" value="/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/surefire/surefirebooter-20250225232328553_3.jar"/>
+    <property name="surefire.real.class.path" value="/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/surefire/surefirebooter-20250226172136691_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="23.0.2"/>
@@ -59,77 +59,85 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="67.0"/>
   </properties>
-  <testcase name="testInsertUser" classname="com.driver.JSONDatabaseTest" time="0.024">
+  <testcase name="testInsertUser" classname="com.driver.JSONDatabaseTest" time="0.127">
     <system-out><![CDATA[[TEST] [Thread-1] Database initialized for testing!
-[THREAD] [Thread-30] Thread 30 is inserting/updating Alice
-[CACHE] [Thread-31] Cache hit for user: Alice
+[THREAD] [Thread-31] Thread 31 is inserting/updating Alice
+[KAFKA] [Thread-1] Kafka event sent: User Alice inserted/updated.
+[CACHE] [Thread-33] Cache hit for user: Alice
 [TEST] [Thread-1] testInsertUser passed!
 ]]></system-out>
+    <system-err><![CDATA[SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+]]></system-err>
   </testcase>
-  <testcase name="testReadUser" classname="com.driver.JSONDatabaseTest" time="0.0">
-    <system-out><![CDATA[[CACHE] [Thread-32] Cache hit for user: Alice
+  <testcase name="testReadUser" classname="com.driver.JSONDatabaseTest" time="0.001">
+    <system-out><![CDATA[[CACHE] [Thread-34] Cache hit for user: Alice
+[KAFKA] [Thread-1] Kafka event sent: User Alice read.
 [TEST] [Thread-1] testReadUser passed!
 ]]></system-out>
   </testcase>
-  <testcase name="testReadAllUsers" classname="com.driver.JSONDatabaseTest" time="0.004">
-    <system-out><![CDATA[[TEST] [Thread-1] testReadAllUsers passed!
+  <testcase name="testReadAllUsers" classname="com.driver.JSONDatabaseTest" time="0.002">
+    <system-out><![CDATA[[KAFKA] [Thread-1] Kafka event sent: All users read.
+[TEST] [Thread-1] testReadAllUsers passed!
 ]]></system-out>
   </testcase>
   <testcase name="testUpdateUser" classname="com.driver.JSONDatabaseTest" time="0.002">
-    <system-out><![CDATA[[CACHE] [Thread-34] Cache hit for user: Alice
-[THREAD] [Thread-35] Thread 35 is inserting/updating Alice
-[CACHE] [Thread-36] Cache hit for user: Alice
+    <system-out><![CDATA[[CACHE] [Thread-36] Cache hit for user: Alice
+[THREAD] [Thread-37] Thread 37 is inserting/updating Alice
+[CACHE] [Thread-38] Cache hit for user: Alice
+[KAFKA] [Thread-1] Kafka event sent: User Alice updated to Google.
 [TEST] [Thread-1] testUpdateUser passed!
 ]]></system-out>
   </testcase>
-  <testcase name="testDeleteUser" classname="com.driver.JSONDatabaseTest" time="0.002">
-    <system-out><![CDATA[[CACHE] [Thread-38] Cache miss for user: Alice. Reading from disk...
+  <testcase name="testDeleteUser" classname="com.driver.JSONDatabaseTest" time="0.001">
+    <system-out><![CDATA[[CACHE] [Thread-40] Cache miss for user: Alice. Reading from disk...
+[KAFKA] [Thread-1] Kafka event sent: User Alice deleted.
 [TEST] [Thread-1] testDeleteUser passed!
 ]]></system-out>
   </testcase>
   <testcase name="testReadMissingUser" classname="com.driver.JSONDatabaseTest" time="0.001">
-    <system-out><![CDATA[[CACHE] [Thread-39] Cache miss for user: Bob. Reading from disk...
+    <system-out><![CDATA[[CACHE] [Thread-41] Cache miss for user: Bob. Reading from disk...
+[KAFKA] [Thread-1] Kafka event sent: Attempted to read non-existent user Bob.
 [TEST] [Thread-1] testReadMissingUser passed!
 ]]></system-out>
   </testcase>
   <testcase name="testTransactionCommit" classname="com.driver.JSONDatabaseTest" time="0.016">
     <system-out><![CDATA[[TEST] [Thread-1] Starting transaction test - Commit scenario...
 [TRANSACTION] [Thread-1] Transaction started.
-[THREAD] [Thread-30] Thread 30 is inserting/updating TransactionUser
+[THREAD] [Thread-31] Thread 31 is inserting/updating TransactionUser
 [TRANSACTION] [Thread-1] Committing transaction...
 [TRANSACTION] [Thread-1] Transaction committed successfully.
-[CACHE] [Thread-31] Cache miss for user: TransactionUser. Reading from disk...
+[CACHE] [Thread-33] Cache miss for user: TransactionUser. Reading from disk...
+[KAFKA] [Thread-30] Event sent to topic json_database_events | partition 0 | offset 513
+[KAFKA] [Thread-30] Event sent to topic json_database_events | partition 0 | offset 514
+[KAFKA] [Thread-30] Event sent to topic json_database_events | partition 0 | offset 515
+[KAFKA] [Thread-1] Kafka event sent: Transaction committed successfully.
 [TEST] [Thread-1] testTransactionCommit passed!
 ]]></system-out>
   </testcase>
   <testcase name="testTransactionRollback" classname="com.driver.JSONDatabaseTest" time="0.001">
     <system-out><![CDATA[[TEST] [Thread-1] Starting transaction test - Rollback scenario...
 [TRANSACTION] [Thread-1] Transaction started.
-[THREAD] [Thread-32] Thread 32 is inserting/updating RollbackUser
+[THREAD] [Thread-34] Thread 34 is inserting/updating RollbackUser
 [TEST] [Thread-1] Simulated error occurred! Rolling back...
 [TRANSACTION] [Thread-1] Transaction rolled back.
-[CACHE] [Thread-33] Cache miss for user: RollbackUser. Reading from disk...
+[CACHE] [Thread-35] Cache miss for user: RollbackUser. Reading from disk...
+[KAFKA] [Thread-1] Kafka event sent: Transaction rolled back.
 [TEST] [Thread-1] testTransactionRollback passed!
+[KAFKA] [Thread-30] Event sent to topic json_database_events | partition 0 | offset 516
 ]]></system-out>
   </testcase>
-  <testcase name="testCachePerformance" classname="com.driver.JSONDatabaseTest" time="0.001">
+  <testcase name="testCachePerformance" classname="com.driver.JSONDatabaseTest" time="0.002">
     <system-out><![CDATA[[TEST] [Thread-1] Starting cache performance test...
-[CACHE] [Thread-34] Cache miss for user: Alice. Reading from disk...
-[CACHE] [Thread-35] Cache miss for user: Alice. Reading from disk...
 [CACHE] [Thread-36] Cache miss for user: Alice. Reading from disk...
 [CACHE] [Thread-37] Cache miss for user: Alice. Reading from disk...
-[BENCHMARK] [Thread-1] Read time WITHOUT cache: 290542 ms
-[BENCHMARK] [Thread-1] Read time WITH cache: 143292 ms
+[CACHE] [Thread-38] Cache miss for user: Alice. Reading from disk...
+[CACHE] [Thread-39] Cache miss for user: Alice. Reading from disk...
+[BENCHMARK] [Thread-1] Read time WITHOUT cache: 573125 ms
+[BENCHMARK] [Thread-1] Read time WITH cache: 134834 ms
+[KAFKA] [Thread-1] Kafka event sent: Cache performance benchmark completed.
 [TEST] [Thread-1] testCachePerformance passed!
-]]></system-out>
-  </testcase>
-  <testcase name="testCacheHitMiss" classname="com.driver.JSONDatabaseTest" time="0.001">
-    <system-out><![CDATA[[TEST] [Thread-1] Testing cache hit/miss behavior...
-[CACHE] [Thread-38] Cache miss for user: Tom Smith. Reading from disk...
-[CACHE] [Thread-39] Cache miss for user: Tom Smith. Reading from disk...
-[CACHE] [Thread-30] Cache miss for user: Tom Smith. Reading from disk...
-[CACHE] [Thread-31] Cache miss for user: Tom Smith. Reading from disk...
-[TEST] [Thread-1] testCacheHitMiss passed!
 ]]></system-out>
   </testcase>
 </testsuite>

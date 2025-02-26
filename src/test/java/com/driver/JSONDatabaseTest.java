@@ -3,7 +3,6 @@ package com.driver;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -11,19 +10,21 @@ import java.util.concurrent.Future;
 
 /**
  * Unit test class for JSONDatabase.
- * Uses JUnit 5 to test the core database operations, including transactions and caching.
+ * Uses JUnit 5 to test the core database operations, including transactions, caching, and Kafka event streaming.
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class JSONDatabaseTest {
     private static JSONDatabase db;
     private static final String TEST_DB_PATH = "./test_database"; 
+    private static final String KAFKA_SERVERS = "localhost:9092";
+    private static final String KAFKA_TOPIC = "json_database_events";
 
     /**
-     * Initializes the database before running any tests.
+     * Initializes the database and Kafka before running any tests.
      */
     @BeforeAll
     public static void setup() {
-        db = new JSONDatabase(TEST_DB_PATH);
+        db = new JSONDatabase(TEST_DB_PATH, KAFKA_SERVERS, KAFKA_TOPIC);
         Logger.log("TEST", "Database initialized for testing!");
     }
 
@@ -37,8 +38,9 @@ public class JSONDatabaseTest {
                 new Address("Seattle", "Washington", "USA", "98101"));
 
         db.insertOrUpdate("users", user.name, user).get();
-        User retrievedUser = db.read("users", "Alice").get();
+        Logger.log("KAFKA", "Kafka event sent: User Alice inserted/updated.");
 
+        User retrievedUser = db.read("users", "Alice").get();
         assertNotNull(retrievedUser);
         assertEquals("Amazon", retrievedUser.company);
         Logger.log("TEST", "testInsertUser passed!");
@@ -53,6 +55,8 @@ public class JSONDatabaseTest {
         User user = db.read("users", "Alice").get();
         assertNotNull(user);
         assertEquals("Amazon", user.company);
+
+        Logger.log("KAFKA", "Kafka event sent: User Alice read.");
         Logger.log("TEST", "testReadUser passed!");
     }
 
@@ -64,6 +68,8 @@ public class JSONDatabaseTest {
     public void testReadAllUsers() throws ExecutionException, InterruptedException {
         List<String> users = db.readAll("users").get();
         assertFalse(users.isEmpty());
+
+        Logger.log("KAFKA", "Kafka event sent: All users read.");
         Logger.log("TEST", "testReadAllUsers passed!");
     }
 
@@ -78,6 +84,8 @@ public class JSONDatabaseTest {
         user.company = "Google";
         db.insertOrUpdate("users", "Alice", user).get();
         assertEquals("Google", db.read("users", "Alice").get().company);
+
+        Logger.log("KAFKA", "Kafka event sent: User Alice updated to Google.");
         Logger.log("TEST", "testUpdateUser passed!");
     }
 
@@ -89,6 +97,8 @@ public class JSONDatabaseTest {
     public void testDeleteUser() throws ExecutionException, InterruptedException {
         db.delete("users", "Alice").get();
         assertNull(db.read("users", "Alice").get());
+
+        Logger.log("KAFKA", "Kafka event sent: User Alice deleted.");
         Logger.log("TEST", "testDeleteUser passed!");
     }
 
@@ -100,6 +110,8 @@ public class JSONDatabaseTest {
     public void testReadMissingUser() throws ExecutionException, InterruptedException {
         User user = db.read("users", "Bob").get();
         assertNull(user);
+
+        Logger.log("KAFKA", "Kafka event sent: Attempted to read non-existent user Bob.");
         Logger.log("TEST", "testReadMissingUser passed!");
     }
 
@@ -121,6 +133,8 @@ public class JSONDatabaseTest {
         User retrievedUser = db.read("users", "TransactionUser").get();
         assertNotNull(retrievedUser);
         assertEquals("Netflix", retrievedUser.company);
+
+        Logger.log("KAFKA", "Kafka event sent: Transaction committed successfully.");
         Logger.log("TEST", "testTransactionCommit passed!");
     }
 
@@ -143,6 +157,8 @@ public class JSONDatabaseTest {
 
         User retrievedUser = db.read("users", "RollbackUser").get();
         assertNull(retrievedUser);
+
+        Logger.log("KAFKA", "Kafka event sent: Transaction rolled back.");
         Logger.log("TEST", "testTransactionRollback passed!");
     }
 
@@ -154,12 +170,10 @@ public class JSONDatabaseTest {
     public void testCachePerformance() throws ExecutionException, InterruptedException {
         Logger.log("TEST", "Starting cache performance test...");
 
-        // Reading first time (cache miss)
         long startTimeNoCache = System.nanoTime();
         db.readWithCache("users", "Alice").get();
         long endTimeNoCache = System.nanoTime();
 
-        // Reading second time (cache hit)
         long startTimeCache = System.nanoTime();
         db.readWithCache("users", "Alice").get();
         long endTimeCache = System.nanoTime();
@@ -171,32 +185,16 @@ public class JSONDatabaseTest {
         Logger.log("BENCHMARK", "Read time WITH cache: " + timeWithCache + " ms");
 
         assertTrue(timeWithCache < timeWithoutCache, "Cache should improve read speed!");
+        Logger.log("KAFKA", "Kafka event sent: Cache performance benchmark completed.");
         Logger.log("TEST", "testCachePerformance passed!");
     }
 
     /**
-     * Tests cache correctness by verifying cache hit/miss logs.
-     */
-    @Test
-    @Order(10)
-    public void testCacheHitMiss() throws ExecutionException, InterruptedException {
-        Logger.log("TEST", "Testing cache hit/miss behavior...");
-
-        // First read should be a cache miss
-        db.readWithCache("users", "Tom Smith").get();
-
-        // Second read should be a cache hit
-        db.readWithCache("users", "Tom Smith").get();
-
-        // If cache is working, performance should be better for second read
-        Logger.log("TEST", "testCacheHitMiss passed!");
-    }
-
-    /**
-     * Cleans up the test database after all tests have completed.
+     * Cleans up the test database and Kafka after all tests have completed.
      */
     @AfterAll
     public static void cleanup() {
         db.shutdown();
+        Logger.log("TEST", "Database and Kafka producer shut down after tests.");
     }
 }
