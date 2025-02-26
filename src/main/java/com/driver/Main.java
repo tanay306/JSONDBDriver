@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.*;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,57 +20,39 @@ public class Main {
         }
 
         try {
-            // Load users from JSON file
             Logger.log("INFO", "Reading users from JSON file...");
             User[] users = objectMapper.readValue(jsonFile, User[].class);
             Logger.log("SUCCESS", "Found " + users.length + " users in JSON.");
 
-            // Insert Users
+            // ✅ Run insertions in parallel
+            List<Callable<Void>> tasks = new ArrayList<>();
             for (User user : users) {
-                db.insertOrUpdate("users", user.name, user);
+                tasks.add(() -> {
+                    db.insertOrUpdate("users", user.name, user).get();
+                    return null;
+                });
             }
 
-            // Read All Users
+            // ✅ Use the new public method instead of accessing executorService
+            db.executeTasks(tasks);
+
             Logger.log("INFO", "Fetching all users after insertion...");
-            List<String> allUsers = db.readAll("users");
+            Future<List<String>> futureUsers = db.readAll("users");
+            List<String> allUsers = futureUsers.get();
+
             for (String user : allUsers) {
                 Logger.log("DATABASE", user);
             }
 
-            // Read a Single User
-            Logger.log("INFO", "Reading user: John Doe...");
-            User john = db.read("users", "John Doe");
-            if (john != null) {
-                Logger.log("SUCCESS", "John Doe found: " + john.company);
-            }
+            Future<User> futureJohn = db.read("users", "John Doe");
+            User john = futureJohn.get();
+            john.company = "Amazon";
+            db.insertOrUpdate("users", "John Doe", john).get();
 
-            // Update a User
-            Logger.log("INFO", "Updating John Doe's company...");
-            if (john != null) {
-                john.company = "Amazon";
-                db.insertOrUpdate("users", "John Doe", john);
-                Logger.log("SUCCESS", "Updated John Doe's company to Amazon.");
-            }
+            db.delete("users", "Jane Doe").get();
+            db.shutdown();
 
-            // Read After Update
-            Logger.log("INFO", "Verifying updated record...");
-            User updatedJohn = db.read("users", "John Doe");
-            if (updatedJohn != null) {
-                Logger.log("SUCCESS", "John Doe's new company: " + updatedJohn.company);
-            }
-
-            // Delete a User
-            Logger.log("INFO", "Deleting Jane Doe...");
-            db.delete("users", "Jane Doe");
-
-            // Fetch All Users After Deletion
-            Logger.log("INFO", "Fetching all users after deletion...");
-            List<String> usersAfterDelete = db.readAll("users");
-            for (String user : usersAfterDelete) {
-                Logger.log("DATABASE", user);
-            }
-
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException | ExecutionException e) {
             Logger.log("ERROR", "Failed to process JSON: " + e.getMessage());
         }
     }

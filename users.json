@@ -34,5 +34,53 @@
       "country": "India",
       "pincode": "600001"
     }
+  },
+  {
+    "name": "Alice Johnson",
+    "age": "28",
+    "contact": "8765432109",
+    "company": "Facebook",
+    "address": {
+      "city": "Pune",
+      "state": "Maharashtra",
+      "country": "India",
+      "pincode": "411001"
+    }
+  },
+  {
+    "name": "Robert Brown",
+    "age": "40",
+    "contact": "7412589630",
+    "company": "Tesla",
+    "address": {
+      "city": "San Francisco",
+      "state": "California",
+      "country": "USA",
+      "pincode": "94101"
+    }
+  },
+  {
+    "name": "Emily Davis",
+    "age": "32",
+    "contact": "8529637410",
+    "company": "Amazon",
+    "address": {
+      "city": "Seattle",
+      "state": "Washington",
+      "country": "USA",
+      "pincode": "98101"
+    }
+  },
+  {
+    "name": "Daniel Martinez",
+    "age": "29",
+    "contact": "3692581470",
+    "company": "Netflix",
+    "address": {
+      "city": "Los Angeles",
+      "state": "California",
+      "country": "USA",
+      "pincode": "90001"
+    }
   }
 ]

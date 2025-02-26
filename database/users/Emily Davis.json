@@ -1,0 +1,12 @@
+{
+  "name" : "Emily Davis",
+  "age" : "32",
+  "contact" : "8529637410",
+  "company" : "Amazon",
+  "address" : {
+    "city" : "Seattle",
+    "state" : "Washington",
+    "country" : "USA",
+    "pincode" : "98101"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name" : "Alice Johnson",
+  "age" : "28",
+  "contact" : "8765432109",
+  "company" : "Facebook",
+  "address" : {
+    "city" : "Pune",
+    "state" : "Maharashtra",
+    "country" : "India",
+    "pincode" : "411001"
+  }
+}

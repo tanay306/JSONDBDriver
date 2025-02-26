@@ -1,0 +1,12 @@
+{
+  "name" : "Robert Brown",
+  "age" : "40",
+  "contact" : "7412589630",
+  "company" : "Tesla",
+  "address" : {
+    "city" : "San Francisco",
+    "state" : "California",
+    "country" : "USA",
+    "pincode" : "94101"
+  }
+}

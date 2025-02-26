@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.driver.JSONDatabaseTest" time="0.134" tests="6" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.driver.JSONDatabaseTest" time="0.145" tests="6" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="23"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.class.path" value="/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/test-classes:/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/classes:/Users/tanaygandhi/.m2/repository/junit/junit/3.8.1/junit-3.8.1.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.0/jackson-databind-2.15.0.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.0/jackson-annotations-2.15.0.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.0/jackson-core-2.15.0.jar:/Users/tanaygandhi/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.8.1/junit-jupiter-api-5.8.1.jar:/Users/tanaygandhi/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/Users/tanaygandhi/.m2/repository/org/junit/platform/junit-platform-commons/1.8.1/junit-platform-commons-1.8.1.jar:/Users/tanaygandhi/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/tanaygandhi/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.8.1/junit-jupiter-engine-5.8.1.jar:/Users/tanaygandhi/.m2/repository/org/junit/platform/junit-platform-engine/1.8.1/junit-platform-engine-1.8.1.jar:"/>
+    <property name="java.class.path" value="/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/test-classes:/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/classes:/Users/tanaygandhi/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.9.3/junit-jupiter-api-5.9.3.jar:/Users/tanaygandhi/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/Users/tanaygandhi/.m2/repository/org/junit/platform/junit-platform-commons/1.9.3/junit-platform-commons-1.9.3.jar:/Users/tanaygandhi/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/tanaygandhi/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.9.3/junit-jupiter-engine-5.9.3.jar:/Users/tanaygandhi/.m2/repository/org/junit/platform/junit-platform-engine/1.9.3/junit-platform-engine-1.9.3.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.0/jackson-databind-2.15.0.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.0/jackson-annotations-2.15.0.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.0/jackson-core-2.15.0.jar:"/>
     <property name="java.vm.vendor" value="Homebrew"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.vendor.url" value="https://github.com/Homebrew/homebrew-core/issues"/>
@@ -13,10 +13,10 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="/opt/homebrew/Cellar/openjdk/23.0.2/libexec/openjdk.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/surefire/surefirebooter-20250225182824071_3.jar /Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/surefire 2025-02-25T18-28-23_129-jvmRun1 surefire-20250225182824071_1tmp surefire_0-20250225182824071_2tmp"/>
+    <property name="sun.java.command" value="/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/surefire/surefirebooter-20250225223950424_3.jar /Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/surefire 2025-02-25T22-39-50_379-jvmRun1 surefire-20250225223950424_1tmp surefire_0-20250225223950424_2tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/test-classes:/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/classes:/Users/tanaygandhi/.m2/repository/junit/junit/3.8.1/junit-3.8.1.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.0/jackson-databind-2.15.0.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.0/jackson-annotations-2.15.0.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.0/jackson-core-2.15.0.jar:/Users/tanaygandhi/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.8.1/junit-jupiter-api-5.8.1.jar:/Users/tanaygandhi/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/Users/tanaygandhi/.m2/repository/org/junit/platform/junit-platform-commons/1.8.1/junit-platform-commons-1.8.1.jar:/Users/tanaygandhi/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/tanaygandhi/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.8.1/junit-jupiter-engine-5.8.1.jar:/Users/tanaygandhi/.m2/repository/org/junit/platform/junit-platform-engine/1.8.1/junit-platform-engine-1.8.1.jar:"/>
+    <property name="surefire.test.class.path" value="/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/test-classes:/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/classes:/Users/tanaygandhi/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.9.3/junit-jupiter-api-5.9.3.jar:/Users/tanaygandhi/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/Users/tanaygandhi/.m2/repository/org/junit/platform/junit-platform-commons/1.9.3/junit-platform-commons-1.9.3.jar:/Users/tanaygandhi/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/tanaygandhi/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.9.3/junit-jupiter-engine-5.9.3.jar:/Users/tanaygandhi/.m2/repository/org/junit/platform/junit-platform-engine/1.9.3/junit-platform-engine-1.9.3.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.0/jackson-databind-2.15.0.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.0/jackson-annotations-2.15.0.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.0/jackson-core-2.15.0.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="/Users/tanaygandhi"/>
     <property name="user.language" value="en"/>
@@ -30,7 +30,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
-    <property name="surefire.real.class.path" value="/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/surefire/surefirebooter-20250225182824071_3.jar"/>
+    <property name="surefire.real.class.path" value="/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/surefire/surefirebooter-20250225223950424_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="23.0.2"/>
@@ -59,40 +59,50 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="67.0"/>
   </properties>
-  <testcase name="testInsertUser" classname="com.driver.JSONDatabaseTest" time="0.034">
-    <system-out><![CDATA[[INFO] Database directory created at: ./test_database
-[INFO] Created new collection directory: users
-[SUCCESS] Inserted/Updated: Alice in collection: users
-[INFO] Reading data from: ./test_database/users/Alice.json
-[TEST] testInsertUser passed!
+  <testcase name="testInsertUser" classname="com.driver.JSONDatabaseTest" time="0.036">
+    <system-out><![CDATA[[TEST] [Thread-1] Database initialized for testing!
+[THREAD] [Thread-30] Thread 30 is inserting/updating Alice
+[INFO] [Thread-30] Thread 30 created new collection directory: users
+[SUCCESS] [Thread-30] Thread 30 inserted/updated Alice in collection: users
+[THREAD] [Thread-31] Thread 31 is reading Alice
+[INFO] [Thread-31] Thread 31 reading data from: ./test_database/users/Alice.json
+[TEST] [Thread-1] testInsertUser passed!
 ]]></system-out>
   </testcase>
-  <testcase name="testReadUser" classname="com.driver.JSONDatabaseTest" time="0.002">
-    <system-out><![CDATA[[INFO] Reading data from: ./test_database/users/Alice.json
-[TEST] testReadUser passed!
+  <testcase name="testReadUser" classname="com.driver.JSONDatabaseTest" time="0.001">
+    <system-out><![CDATA[[THREAD] [Thread-32] Thread 32 is reading Alice
+[INFO] [Thread-32] Thread 32 reading data from: ./test_database/users/Alice.json
+[TEST] [Thread-1] testReadUser passed!
 ]]></system-out>
   </testcase>
   <testcase name="testReadAllUsers" classname="com.driver.JSONDatabaseTest" time="0.005">
-    <system-out><![CDATA[[SUCCESS] Read 1 records from collection: users
-[TEST] testReadAllUsers passed!
+    <system-out><![CDATA[[THREAD] [Thread-33] Thread 33 is reading all from collection: users
+[SUCCESS] [Thread-33] Thread 33 read 1 records from collection: users
+[TEST] [Thread-1] testReadAllUsers passed!
 ]]></system-out>
   </testcase>
   <testcase name="testUpdateUser" classname="com.driver.JSONDatabaseTest" time="0.002">
-    <system-out><![CDATA[[INFO] Reading data from: ./test_database/users/Alice.json
-[SUCCESS] Inserted/Updated: Alice in collection: users
-[INFO] Reading data from: ./test_database/users/Alice.json
-[TEST] testUpdateUser passed!
+    <system-out><![CDATA[[THREAD] [Thread-34] Thread 34 is reading Alice
+[INFO] [Thread-34] Thread 34 reading data from: ./test_database/users/Alice.json
+[THREAD] [Thread-35] Thread 35 is inserting/updating Alice
+[SUCCESS] [Thread-35] Thread 35 inserted/updated Alice in collection: users
+[THREAD] [Thread-36] Thread 36 is reading Alice
+[INFO] [Thread-36] Thread 36 reading data from: ./test_database/users/Alice.json
+[TEST] [Thread-1] testUpdateUser passed!
 ]]></system-out>
   </testcase>
-  <testcase name="testDeleteUser" classname="com.driver.JSONDatabaseTest" time="0.002">
-    <system-out><![CDATA[[SUCCESS] Deleted resource: ./test_database/users/Alice.json
-[ERROR] File not found: ./test_database/users/Alice.json
-[TEST] testDeleteUser passed!
+  <testcase name="testDeleteUser" classname="com.driver.JSONDatabaseTest" time="0.001">
+    <system-out><![CDATA[[THREAD] [Thread-37] Thread 37 is deleting Alice
+[SUCCESS] [Thread-37] Thread 37 deleted resource: ./test_database/users/Alice.json
+[THREAD] [Thread-38] Thread 38 is reading Alice
+[ERROR] [Thread-38] File not found: ./test_database/users/Alice.json
+[TEST] [Thread-1] testDeleteUser passed!
 ]]></system-out>
   </testcase>
   <testcase name="testReadMissingUser" classname="com.driver.JSONDatabaseTest" time="0.001">
-    <system-out><![CDATA[[ERROR] File not found: ./test_database/users/Bob.json
-[TEST] testReadMissingUser passed!
+    <system-out><![CDATA[[THREAD] [Thread-39] Thread 39 is reading Bob
+[ERROR] [Thread-39] File not found: ./test_database/users/Bob.json
+[TEST] [Thread-1] testReadMissingUser passed!
 ]]></system-out>
   </testcase>
 </testsuite>

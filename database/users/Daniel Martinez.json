@@ -1,0 +1,12 @@
+{
+  "name" : "Daniel Martinez",
+  "age" : "29",
+  "contact" : "3692581470",
+  "company" : "Netflix",
+  "address" : {
+    "city" : "Los Angeles",
+    "state" : "California",
+    "country" : "USA",
+    "pincode" : "90001"
+  }
+}
