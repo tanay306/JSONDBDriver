@@ -8,7 +8,7 @@ import java.util.concurrent.*;
 import java.util.ArrayList;
 
 /**
- * Main class for demonstrating JSON database operations with ACID transactions and multi-threading.
+ * Main class for demonstrating JSON database operations with ACID transactions, multi-threading, and caching.
  */
 public class Main {
     public static void main(String[] args) {
@@ -38,6 +38,9 @@ public class Main {
 
             // Simulate transaction with rollback
             simulateTransaction(db);
+
+            // Demonstrate caching performance
+            demonstrateCachePerformance(db);
 
             // Delete a user
             deleteUser(db, "Jane Doe");
@@ -124,6 +127,17 @@ public class Main {
             db.rollbackTransaction();
             Logger.log("TRANSACTION", "Transaction rolled back!");
         }
+    }
+
+    /**
+     * Demonstrates cache performance by comparing read speeds.
+     */
+    private static void demonstrateCachePerformance(JSONDatabase db) throws ExecutionException, InterruptedException {
+        Logger.log("BENCHMARK", "Starting caching performance demonstration...");
+
+        List<String> userNames = List.of("John Doe", "Alice Johnson", "Tom Smith");
+
+        db.calculateUserStatistics("users", userNames);
     }
 
     /**

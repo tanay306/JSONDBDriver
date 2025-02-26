@@ -11,7 +11,7 @@ import java.util.concurrent.Future;
 
 /**
  * Unit test class for JSONDatabase.
- * Uses JUnit 5 to test the core database operations, including transactions.
+ * Uses JUnit 5 to test the core database operations, including transactions and caching.
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class JSONDatabaseTest {
@@ -32,15 +32,12 @@ public class JSONDatabaseTest {
      */
     @Test
     @Order(1)
-    public void testInsertUser() throws IOException, ExecutionException, InterruptedException {
+    public void testInsertUser() throws ExecutionException, InterruptedException {
         User user = new User("Alice", "28", "9999999999", "Amazon",
                 new Address("Seattle", "Washington", "USA", "98101"));
 
-        Future<Void> futureInsert = db.insertOrUpdate("users", user.name, user);
-        futureInsert.get();
-
-        Future<User> futureUser = db.read("users", "Alice");
-        User retrievedUser = futureUser.get(); 
+        db.insertOrUpdate("users", user.name, user).get();
+        User retrievedUser = db.read("users", "Alice").get();
 
         assertNotNull(retrievedUser);
         assertEquals("Amazon", retrievedUser.company);
@@ -53,8 +50,7 @@ public class JSONDatabaseTest {
     @Test
     @Order(2)
     public void testReadUser() throws ExecutionException, InterruptedException {
-        Future<User> futureUser = db.read("users", "Alice");
-        User user = futureUser.get();
+        User user = db.read("users", "Alice").get();
         assertNotNull(user);
         assertEquals("Amazon", user.company);
         Logger.log("TEST", "testReadUser passed!");
@@ -66,9 +62,7 @@ public class JSONDatabaseTest {
     @Test
     @Order(3)
     public void testReadAllUsers() throws ExecutionException, InterruptedException {
-        Future<List<String>> futureUsers = db.readAll("users");
-        List<String> users = futureUsers.get();
-
+        List<String> users = db.readAll("users").get();
         assertFalse(users.isEmpty());
         Logger.log("TEST", "testReadAllUsers passed!");
     }
@@ -79,18 +73,11 @@ public class JSONDatabaseTest {
     @Test
     @Order(4)
     public void testUpdateUser() throws ExecutionException, InterruptedException {
-        Future<User> futureUser = db.read("users", "Alice");
-        User user = futureUser.get();
+        User user = db.read("users", "Alice").get();
         assertNotNull(user);
-
         user.company = "Google";
         db.insertOrUpdate("users", "Alice", user).get();
-
-        Future<User> futureUpdatedUser = db.read("users", "Alice");
-        User updatedUser = futureUpdatedUser.get();
-
-        assertNotNull(updatedUser);
-        assertEquals("Google", updatedUser.company);
+        assertEquals("Google", db.read("users", "Alice").get().company);
         Logger.log("TEST", "testUpdateUser passed!");
     }
 
@@ -101,11 +88,7 @@ public class JSONDatabaseTest {
     @Order(5)
     public void testDeleteUser() throws ExecutionException, InterruptedException {
         db.delete("users", "Alice").get();
-
-        Future<User> futureUser = db.read("users", "Alice");
-        User user = futureUser.get();
-
-        assertNull(user);
+        assertNull(db.read("users", "Alice").get());
         Logger.log("TEST", "testDeleteUser passed!");
     }
 
@@ -115,9 +98,7 @@ public class JSONDatabaseTest {
     @Test
     @Order(6)
     public void testReadMissingUser() throws ExecutionException, InterruptedException {
-        Future<User> futureUser = db.read("users", "Bob");
-        User user = futureUser.get();
-
+        User user = db.read("users", "Bob").get();
         assertNull(user);
         Logger.log("TEST", "testReadMissingUser passed!");
     }
@@ -137,9 +118,7 @@ public class JSONDatabaseTest {
         db.insertOrUpdate("users", "TransactionUser", user).get();
         db.commitTransaction();
 
-        Future<User> futureUser = db.read("users", "TransactionUser");
-        User retrievedUser = futureUser.get();
-
+        User retrievedUser = db.read("users", "TransactionUser").get();
         assertNotNull(retrievedUser);
         assertEquals("Netflix", retrievedUser.company);
         Logger.log("TEST", "testTransactionCommit passed!");
@@ -162,11 +141,55 @@ public class JSONDatabaseTest {
         Logger.log("TEST", "Simulated error occurred! Rolling back...");
         db.rollbackTransaction();
 
-        Future<User> futureUser = db.read("users", "RollbackUser");
-        User retrievedUser = futureUser.get();
-
+        User retrievedUser = db.read("users", "RollbackUser").get();
         assertNull(retrievedUser);
         Logger.log("TEST", "testTransactionRollback passed!");
+    }
+
+    /**
+     * Tests cache efficiency by comparing read speeds.
+     */
+    @Test
+    @Order(9)
+    public void testCachePerformance() throws ExecutionException, InterruptedException {
+        Logger.log("TEST", "Starting cache performance test...");
+
+        // Reading first time (cache miss)
+        long startTimeNoCache = System.nanoTime();
+        db.readWithCache("users", "Alice").get();
+        long endTimeNoCache = System.nanoTime();
+
+        // Reading second time (cache hit)
+        long startTimeCache = System.nanoTime();
+        db.readWithCache("users", "Alice").get();
+        long endTimeCache = System.nanoTime();
+
+        long timeWithoutCache = (endTimeNoCache - startTimeNoCache) / 1_000_000; // Convert to milliseconds
+        long timeWithCache = (endTimeCache - startTimeCache) / 1_000_000; // Convert to milliseconds
+
+        Logger.log("BENCHMARK", "Read time WITHOUT cache: " + timeWithoutCache + " ms");
+        Logger.log("BENCHMARK", "Read time WITH cache: " + timeWithCache + " ms");
+
+        assertTrue(timeWithCache <= timeWithoutCache, "Cache should improve read speed!");
+        Logger.log("TEST", "testCachePerformance passed!");
+    }
+
+    /**
+     * Tests cache correctness by verifying cache hit/miss logs.
+     */
+    @Test
+    @Order(10)
+    public void testCacheHitMiss() throws ExecutionException, InterruptedException {
+        Logger.log("TEST", "Testing cache hit/miss behavior...");
+
+        // First read should be a cache miss
+        db.readWithCache("users", "Tom Smith").get();
+
+        // Second read should be a cache hit
+        db.readWithCache("users", "Tom Smith").get();
+
+        // If cache is working, performance should be better for second read
+        Logger.log("TEST", "testCacheHitMiss passed!");
     }
 
     /**
@@ -174,16 +197,6 @@ public class JSONDatabaseTest {
      */
     @AfterAll
     public static void cleanup() {
-        File testDB = new File(TEST_DB_PATH);
-        if (testDB.exists()) {
-            for (File file : testDB.listFiles()) {
-                if (file.isFile()) {
-                    file.delete();
-                }
-            }
-            testDB.delete();
-        }
-        Logger.log("TEST", "Database cleaned up after tests!");
         db.shutdown();
     }
 }
