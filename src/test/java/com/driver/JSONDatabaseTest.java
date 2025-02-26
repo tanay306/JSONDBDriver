@@ -164,13 +164,13 @@ public class JSONDatabaseTest {
         db.readWithCache("users", "Alice").get();
         long endTimeCache = System.nanoTime();
 
-        long timeWithoutCache = (endTimeNoCache - startTimeNoCache) / 1_000_000; // Convert to milliseconds
-        long timeWithCache = (endTimeCache - startTimeCache) / 1_000_000; // Convert to milliseconds
+        long timeWithoutCache = (endTimeNoCache - startTimeNoCache);
+        long timeWithCache = (endTimeCache - startTimeCache);
 
         Logger.log("BENCHMARK", "Read time WITHOUT cache: " + timeWithoutCache + " ms");
         Logger.log("BENCHMARK", "Read time WITH cache: " + timeWithCache + " ms");
 
-        assertTrue(timeWithCache <= timeWithoutCache, "Cache should improve read speed!");
+        assertTrue(timeWithCache < timeWithoutCache, "Cache should improve read speed!");
         Logger.log("TEST", "testCachePerformance passed!");
     }
 

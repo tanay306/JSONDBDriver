@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.driver.JSONDatabaseTest" time="0.141" tests="10" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.driver.JSONDatabaseTest" time="0.147" tests="10" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="23"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -13,7 +13,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="/opt/homebrew/Cellar/openjdk/23.0.2/libexec/openjdk.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/surefire/surefirebooter-20250225232031222_3.jar /Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/surefire 2025-02-25T23-20-31_181-jvmRun1 surefire-20250225232031222_1tmp surefire_0-20250225232031222_2tmp"/>
+    <property name="sun.java.command" value="/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/surefire/surefirebooter-20250225232328553_3.jar /Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/surefire 2025-02-25T23-23-28_511-jvmRun1 surefire-20250225232328553_1tmp surefire_0-20250225232328553_2tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/test-classes:/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/classes:/Users/tanaygandhi/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.9.3/junit-jupiter-api-5.9.3.jar:/Users/tanaygandhi/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/Users/tanaygandhi/.m2/repository/org/junit/platform/junit-platform-commons/1.9.3/junit-platform-commons-1.9.3.jar:/Users/tanaygandhi/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/tanaygandhi/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.9.3/junit-jupiter-engine-5.9.3.jar:/Users/tanaygandhi/.m2/repository/org/junit/platform/junit-platform-engine/1.9.3/junit-platform-engine-1.9.3.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.0/jackson-databind-2.15.0.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.0/jackson-annotations-2.15.0.jar:/Users/tanaygandhi/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.0/jackson-core-2.15.0.jar:"/>
@@ -30,7 +30,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
-    <property name="surefire.real.class.path" value="/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/surefire/surefirebooter-20250225232031222_3.jar"/>
+    <property name="surefire.real.class.path" value="/Users/tanaygandhi/Desktop/Work/Passion Project/JSONDBDriver/target/surefire/surefirebooter-20250225232328553_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="23.0.2"/>
@@ -59,19 +59,19 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="67.0"/>
   </properties>
-  <testcase name="testInsertUser" classname="com.driver.JSONDatabaseTest" time="0.025">
+  <testcase name="testInsertUser" classname="com.driver.JSONDatabaseTest" time="0.024">
     <system-out><![CDATA[[TEST] [Thread-1] Database initialized for testing!
 [THREAD] [Thread-30] Thread 30 is inserting/updating Alice
 [CACHE] [Thread-31] Cache hit for user: Alice
 [TEST] [Thread-1] testInsertUser passed!
 ]]></system-out>
   </testcase>
-  <testcase name="testReadUser" classname="com.driver.JSONDatabaseTest" time="0.001">
+  <testcase name="testReadUser" classname="com.driver.JSONDatabaseTest" time="0.0">
     <system-out><![CDATA[[CACHE] [Thread-32] Cache hit for user: Alice
 [TEST] [Thread-1] testReadUser passed!
 ]]></system-out>
   </testcase>
-  <testcase name="testReadAllUsers" classname="com.driver.JSONDatabaseTest" time="0.005">
+  <testcase name="testReadAllUsers" classname="com.driver.JSONDatabaseTest" time="0.004">
     <system-out><![CDATA[[TEST] [Thread-1] testReadAllUsers passed!
 ]]></system-out>
   </testcase>
@@ -82,17 +82,17 @@
 [TEST] [Thread-1] testUpdateUser passed!
 ]]></system-out>
   </testcase>
-  <testcase name="testDeleteUser" classname="com.driver.JSONDatabaseTest" time="0.001">
+  <testcase name="testDeleteUser" classname="com.driver.JSONDatabaseTest" time="0.002">
     <system-out><![CDATA[[CACHE] [Thread-38] Cache miss for user: Alice. Reading from disk...
 [TEST] [Thread-1] testDeleteUser passed!
 ]]></system-out>
   </testcase>
-  <testcase name="testReadMissingUser" classname="com.driver.JSONDatabaseTest" time="0.0">
+  <testcase name="testReadMissingUser" classname="com.driver.JSONDatabaseTest" time="0.001">
     <system-out><![CDATA[[CACHE] [Thread-39] Cache miss for user: Bob. Reading from disk...
 [TEST] [Thread-1] testReadMissingUser passed!
 ]]></system-out>
   </testcase>
-  <testcase name="testTransactionCommit" classname="com.driver.JSONDatabaseTest" time="0.014">
+  <testcase name="testTransactionCommit" classname="com.driver.JSONDatabaseTest" time="0.016">
     <system-out><![CDATA[[TEST] [Thread-1] Starting transaction test - Commit scenario...
 [TRANSACTION] [Thread-1] Transaction started.
 [THREAD] [Thread-30] Thread 30 is inserting/updating TransactionUser
@@ -118,12 +118,12 @@
 [CACHE] [Thread-35] Cache miss for user: Alice. Reading from disk...
 [CACHE] [Thread-36] Cache miss for user: Alice. Reading from disk...
 [CACHE] [Thread-37] Cache miss for user: Alice. Reading from disk...
-[BENCHMARK] [Thread-1] Read time WITHOUT cache: 0 ms
-[BENCHMARK] [Thread-1] Read time WITH cache: 0 ms
+[BENCHMARK] [Thread-1] Read time WITHOUT cache: 290542 ms
+[BENCHMARK] [Thread-1] Read time WITH cache: 143292 ms
 [TEST] [Thread-1] testCachePerformance passed!
 ]]></system-out>
   </testcase>
-  <testcase name="testCacheHitMiss" classname="com.driver.JSONDatabaseTest" time="0.0">
+  <testcase name="testCacheHitMiss" classname="com.driver.JSONDatabaseTest" time="0.001">
     <system-out><![CDATA[[TEST] [Thread-1] Testing cache hit/miss behavior...
 [CACHE] [Thread-38] Cache miss for user: Tom Smith. Reading from disk...
 [CACHE] [Thread-39] Cache miss for user: Tom Smith. Reading from disk...
